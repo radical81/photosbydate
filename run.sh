@@ -1,11 +1,15 @@
 #!/bin/bash
 set -x
 
-for f in *.JPG
+photos=("jpg" "JPG" "png" "PNG") 
+for p in "${photos[@]}"
 do
-    dateFolder=$(mdls "$f" | awk '/^kMDItemContentCreationDate / { print $3 "/"}')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder
+    for f in *.$p
+    do
+        dateFolder=$(mdls "$f" | awk '/^kMDItemContentCreationDate / { print $3 "/"}')
+        mkdir -p $dateFolder
+        mv "$f" $dateFolder
+    done
 done
 
 videos=("mov" "MOV" "MP4" "mp4") 
