@@ -8,58 +8,20 @@ do
 	mv "$f" $dateFolder
 done
 
-for f in *.MOV
-do
-    dateFolder=$(exiftool -CreationDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder    
-done
+videos=("mov" "MOV" "MP4" "mp4") 
 
-for f in *.mov
-do
-    dateFolder=$(exiftool -CreateDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder    
-done
-
-for f in *.MOV
-do
-    dateFolder=$(exiftool -CreateDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder    
-done
-
-for f in *.mov
-do
-    dateFolder=$(exiftool -CreationDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder    
-done
-
-for f in *.MP4
-do
-    dateFolder=$(exiftool -CreationDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder    
-done
-
-for f in *.mp4
-do
-    dateFolder=$(exiftool -CreateDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder    
-done
-
-for f in *.MP4
-do
-    dateFolder=$(exiftool -CreateDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder    
-done
-
-for f in *.mp4
-do
-    dateFolder=$(exiftool -CreationDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
-    mkdir -p $dateFolder
-	mv "$f" $dateFolder    
+for v in "${videos[@]}"
+do 
+    for f in *.$v
+    do
+        dateFolder=$(exiftool -CreationDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
+        mkdir -p $dateFolder
+        mv "$f" $dateFolder    
+    done    
+    for f in *.$v
+    do
+        dateFolder=$(exiftool -CreateDate "$f" |awk '{print $4 "/"}' |sed -e 's/:/-/g')
+        mkdir -p $dateFolder
+        mv "$f" $dateFolder    
+    done        
 done
