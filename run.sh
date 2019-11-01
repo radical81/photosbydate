@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-photos=("jpg" "JPG" "png" "PNG") 
+photos=("jpg" "JPG" "png" "PNG" "JPEG" "HEIC") 
 for p in "${photos[@]}"
 do
     for f in *.$p
